@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Add a sample workflow. - Jibu Documentation</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../../css/theme.css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Add a sample workflow.";
+    var mkdocs_page_input_path = "EventTrigger/add-workflow.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Jibu Documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../..">Home</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">EventTrigger</span></p>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Add a sample workflow.</a>
+    <ul class="current">
+    </ul>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">TextIt</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../TextIt/textit-config/">Configure TextIt API Settings</a>
+                    </li>
+                </ul>
+                <p class="caption"><span class="caption-text">Validatecontacts</span></p>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Validatecontacts/contact-validity-notification/">Configure how invalid contact notifications are sent.</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Validatecontacts/email-status-field/">Set up a custom profile field to show email address status</a>
+                    </li>
+                    <li class="toctree-l1"><a class="reference internal" href="../../Validatecontacts/phone-status-field/">Set up a custom profile field to show phonenumber status</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Jibu Documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>EventTrigger &raquo;</li>
+        
+      
+    
+    <li>Add a sample workflow.</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="add-a-sample-workflow">Add a sample workflow.</h1>
+<p>A sample workflow that sends an SMS on course completion has been created. This can be duplicated for other events which trigger an SMS.</p>
+<ol>
+<li>On your local machine, create a file named <code>Course_Completed_SMS.json</code>.</li>
+<li>
+<p>Add the following content to the file and save.</p>
+<p><code>{"name":"Course Completion SMS","description":"{\"text\":\"&lt;p dir=\\\"ltr\\\" style=\\\"text-align: left;\\\"&gt;SMS Sent on course completion&lt;br&gt;&lt;\\\/p&gt;\",\"format\":\"1\"}","event":"\\core\\event\\course_completed","debug":"1","steps":{"9":{"id":"9","name":"User phone number","description":"Find the phone number of the user who has enrolled to a course","type":"lookups","stepclass":"\\tool_trigger\\steps\\lookups\\user_lookup_step","data":"{\"useridfield\":\"userid\",\"outputprefix\":\"user_\",\"nodeleted\":\"1\",\"stepdesc\":\"User lookup\",\"typedesc\":\"Lookup\"}","steporder":"0"},"10":{"id":"10","name":"Find course","description":"Find the course id of the course they enrolled to","type":"lookups","stepclass":"\\tool_trigger\\steps\\lookups\\course_lookup_step","data":"{\"courseidfield\":\"courseid\",\"outputprefix\":\"course_\",\"stepdesc\":\"Course lookup\",\"typedesc\":\"Lookup\"}","steporder":"1"},"11":{"id":"11","name":"Send SMS","description":"Send SMS to user on enrollment","type":"actions","stepclass":"\\tool_trigger\\steps\\actions\\http_post_action_step","data":"{\"url\":\"https:\\\/\\\/api.textit.in\\\/api\\\/v2\\\/broadcasts.json\",\"httpheaders\":\"Authorization: Token f1a013b6ea6ead9af3d5fd858b46d67b6ad7d61e\\r\\nContent-Type: application\\\/json\",\"httpparams\":\"{\\\"text\\\":\\\"Congratulations! You have completed {course_fullname}. We hope that this course was helpful to you.\\\",\\\"urns\\\":[\\\"tel:{user_phone2}\\\"]}\",\"jsonencode\":\"0\",\"expectedresponse\":\"201\",\"stepdesc\":\"HTTP Post\",\"typedesc\":\"Action\"}","steporder":"2"}},"moodleversion":"2020061503","pluginversion":"2021030400"}</code></p>
+</li>
+<li>
+<p>Go to Site administration &gt; Plugins &gt; Admin tools &gt; Event Trigger &gt; Manage.</p>
+</li>
+<li>Click on Import a workflow &gt; Choose a file, choose the file created in step 1 and click on <code>Save Changes</code>.
+    <img alt="Screenshot" src="../../img/eventtrigger-choose-file.png" /></li>
+<li>After the file has been imported, it will appear in the list of workflows. The workflow can then be duplicated and edited to suit other events.
+    <img alt="Screenshot" src="../../img/eventtrigger-workflows.png" /></li>
+</ol>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../TextIt/textit-config/" class="btn btn-neutral float-right" title="Configure TextIt API Settings">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../.." class="btn btn-neutral" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../.." style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../TextIt/textit-config/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
